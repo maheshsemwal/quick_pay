@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Logo from '../components/Logo'
 const LoginPage = () => {
     const navigate = useNavigate()
     const [email, setEmail] = useState('');
@@ -11,7 +12,7 @@ const LoginPage = () => {
     useEffect(()=>{
             const userInfo = JSON.parse(localStorage.getItem('userInfo'))
             if(userInfo){
-                navigate('/home')
+                navigate('/dashboard')
                }
     }, [navigate])
     const handleLogin = async() => {
@@ -32,9 +33,9 @@ const LoginPage = () => {
             toast.success("Login Successfull");
             localStorage.setItem("userInfo", JSON.stringify(data))
             setLoading(false)
-            navigate('/home')
+            navigate('/dashboard')
         } catch(e){
-            toast.error(`${e.message}`)
+            toast.error(`Invalid Email or Password`)
             setLoading(false)
         }
     }
@@ -48,7 +49,7 @@ const LoginPage = () => {
                 </svg>
                 <div className='text-center bg-slate-300 pt-20 pl-32 pr-32 p-20 rounded-lg'>
 
-                    <h1 className='text-4xl text-indigo-600 font-semibold italic md:text-5xl'>Quick <span className=' text-black'>Pay</span></h1>
+                <Logo/>
                     <div className='text-2xl font-semibold italic text-blue-900 mt-9'>Login to Your Account</div>
                     <div className='text-2xl font-semibold mb-9 text-blue-600'>Welcome Back</div>
                     <div className='flex flex-col'>

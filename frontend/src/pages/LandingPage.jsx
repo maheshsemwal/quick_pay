@@ -1,12 +1,13 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import Logo from '../components/Logo'
 
 const LandingPage = () => {
     const navigate = useNavigate()
     return (
         <>
             <div className='flex justify-between  pl-10 pr-10 pt-6 pb-6 bg-indigo-100'>
-                <h1 className='text-3xl text-indigo-600 font-semibold italic md:text-5xl'>Quick <span className=' text-black'>Pay</span></h1>
+                <Logo/>
                 <button onClick={()=> navigate('/login')}
                     className=" py-1 text-indigo-600 font-medium bg-indigo-50  inline-flex items-center px-3  duration-100 border rounded-lg hover:border-indigo-600 hover:bg-indigo-200 active:shadow-lg sm:py-2 sm:px-5 "
                  >

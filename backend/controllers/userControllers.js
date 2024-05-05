@@ -11,21 +11,14 @@ const allUsers = asyncHandler(async (req, res) => {
     const keyword = req.query.search
       ? {
           $or: [
-            { firstName: { $regex: req.query.search, $options: "i" } },
-            { lastName: { $regex: req.query.search, $options: "i" } },
+            { username: { $regex: req.query.search, $options: "i" } },
             { email: { $regex: req.query.search, $options: "i" } },
           ],
         }
       : {};
   
-    const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
-    res.send({users : users.map(user =>({
-        id : user._id,
-        username : user.username,
-        firstName : user.firstName,
-        lastName : user.lastName,
-        email: user.email
-    }))});
+    const users = await User.find(keyword);
+    res.send(users);
   });
   
 const registerUser = asyncHandler(async (req, res) => {
@@ -66,6 +59,7 @@ const registerUser = asyncHandler(async (req, res) => {
             username: user.username,
             FirstName: user.firstName,
             LastName: user.lastName,
+            profilePic: user.profilePic,
             email: user.email,
             token: generateToken(user._id)
         })
@@ -92,6 +86,7 @@ const loginUser = asyncHandler(async (req, res) => {
             username: user.username,
             FirstName: user.firstName,
             LastName: user.lastName,
+            profilePic: user.profilePic,
             email: user.email,
             token: generateToken(user._id),
         })

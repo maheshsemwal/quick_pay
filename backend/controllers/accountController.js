@@ -4,27 +4,23 @@ const { convertToFloat, convertToInt } = require('../config/currencyConverter')
 const { default: mongoose } = require('mongoose')
 
 const getBalance = asyncHandler(async (req, res) => {
-    const { userId } = req.body
+    const { userId } = req.query;
     try {
-        console.log("request goes");
-        const account = await Account.findOne({
-            userId
-        })
+        console.log("Request received for balance");
+        const account = await Account.findOne({ userId });
         if (!account) {
-            res.status(404)
-            throw new Error("Account not found")
+            res.status(404);
+            throw new Error("Account not found");
         }
-        console.log(account.balance)
-        const bal = convertToFloat(account.balance)
-        res.status(200).json({
-            balance: bal
-        })
-
-    } catch (e) {
-        res.status(401)
-        throw new Error('Internal Server error')
+        console.log(account.balance);
+        const balance = convertToFloat(account.balance);
+        res.status(200).json({ balance });
+    } catch (err) {
+        console.error(`Error in getBalance: ${err.message}`);
+        res.status(500).json({ error: "Internal Server Error" });
     }
-})
+});
+
 
 
 const transferFunds = asyncHandler(async (req, res) =>{
