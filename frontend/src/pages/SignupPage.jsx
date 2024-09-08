@@ -78,7 +78,7 @@ const SignupPage = () => {
           'Content-Type': 'application/json'
         }
       }
-      const response = await axios.post("http://localhost:3000/api/v1/user/", {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/`, {
         username: userName,
         firstName: firstName,
         lastName: lastName,

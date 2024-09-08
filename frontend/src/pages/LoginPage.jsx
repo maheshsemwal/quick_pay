@@ -29,7 +29,7 @@ const LoginPage = () => {
                 }
             }
 
-            const {data} = await axios.post('http://localhost:3000/api/v1/user/login', {username: email, password: password}, config);
+            const {data} = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/login`, {username: email, password: password}, config);
             toast.success("Login Successfull");
             localStorage.setItem("userInfo", JSON.stringify(data))
             setLoading(false)

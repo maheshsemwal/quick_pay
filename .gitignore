@@ -7,7 +7,6 @@ build/
 coverage/
 test-results/
 
-/frontend
 # Logs
 logs
 *.log
